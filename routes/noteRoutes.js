@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const { createNewNote } = require('../public/lib/notes');
-let { notesArray } = require('../db/notes.json');
+let { notesArray } = require('../db/db.json');
 
-router.get('/notes', (req, res) => {
+router.get('/api/notes', (req, res) => {
   let results = notesArray;
   res.json(results);
 });
 
-router.post('/notes', (req, res) => {
+router.post('/api/notes', (req, res) => {
   if(notesArray){
   req.body.id = notesArray.length.toString();
   } else 

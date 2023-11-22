@@ -1,42 +1,34 @@
-const fs = require('fs');
-const path = require('path');
+const path = require("path");
+const fs = require("fs");
 
-function createNewNote(body, notesArray) {
-  const note = body;
-  notesArray.push(note);
-  fs.writeFileSync(
-    path.join(__dirname, '../db/db.json'),
-    JSON.stringify({ notesArray }, null, 2)
-  );
-  return note;
-}
+let createNoteData = [];
 
-
-function deleteNote(id, notes) {
-  let notesArray = notes.filter(el => {
-    if (el.id == id) {
-      return false
-    } else {
-      return true
+app.get("/api/notes", function (err, res) {
+    try {
+      createNoteData = fs.readFileSync("db/db.json", "utf8");
+      console.log("Hello from the SERVER!");
+      createNoteData = JSON.parse(createNoteData);
+    } catch (err) {
+      console.log("\n error (catch err app.get):");
+      console.log(err);
     }
-  })
-
-
-  let index = 0;
-  notesArray.forEach(note => {
-    note.id = index;
-    index += 1;
+    res.json(createNoteData);
   });
 
- 
-  fs.writeFileSync(
-    path.join(__dirname, '../db/db.json'),
-    JSON.stringify({ notesArray }, null, 2)
-  );
-  return notesArray;
-}
-
-module.exports = {
-  createNewNote,
-  deleteNote
-};
+  app.post("/api/notes", function (req, res) {
+    try {
+      createNoteData = fs.readFileSync("./db/db.json", "utf8");
+      console.log(createNoteData);
+      createNoteData = JSON.parse(createNoteData);
+      req.body.id = createNoteData.length;
+      createNoteData.push(req.body);
+      createNoteData = JSON.stringify(createNoteData);
+      fs.writeFile("./db/db.json", createNoteData, "utf8", function (err) {
+        if (err) throw err;
+      });
+  
+      res.json(JSON.parse(createNoteData));
+    } catch (err) {
+      throw err;
+    }
+  });
