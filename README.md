@@ -10,11 +10,11 @@ It'd tedious to remember everything you need to do in a day. Now you don't have 
 * [Usage](#usage)
 * [License](#license)
 
-##Deployment
+## Deployment
 
 Visit our live page at https://noted-11-f00ba2fbf474.herokuapp.com/ to get started today!
 
-##Usage
+## Usage
 
 Default Page ![image](https://github.com/Villzies/Noted/assets/135443479/23d1a50d-c326-47b0-9265-f05e5bc6edc8)
 Writing a Note ![image](https://github.com/Villzies/Noted/assets/135443479/463901d2-85c8-487f-9b36-72e4694d0a81)
